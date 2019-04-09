@@ -1,7 +1,7 @@
-# UniFi-NVR-Controller
+# Important
 Starting with Unifi Video 3.xx.x, in-place upgrades are not fully supported. It's best to generate and save a backup file, and remove your data folder. Then restore the backup from the web setup page.
 
-# unifi-video-controller
+# unifi-nvr-controller
 
 This docker image runs the unifi-video controller on Ubuntu. Originally intended for Unraid 6.x, it should run fine anywhere.
 
