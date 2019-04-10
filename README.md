@@ -31,7 +31,7 @@ docker run \
         -e PUID=99 \
         -e PGID=100 \
         -e DEBUG=1 \
-        pducharme/unifi-video-controller
+        ideny/unifi-nvr-controller
 ```
 
 # Extra instructions for Docker for Windows
