@@ -22,6 +22,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75
   apt-get install -y apt-utils && \
   apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
   apt-get install -y  \
+  apt --fix-broken install \
     jsvc \
     jq \
     moreutils \
