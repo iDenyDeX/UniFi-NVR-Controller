@@ -16,13 +16,13 @@ ADD unifi-video.patch /unifi-video.patch
 ADD run.sh /run.sh
 
 # Create folder for Sanology NAS
-RUN cd /volume1/docker/ \
-  pwd \
-  mkdir -p unifi-video/videos \
-  ls -al \
-  cd unifi-video \
-  chown -R 99:100 /volume1/docker/unifi-video/ \
-  ls -al
+#RUN cd /volume1/docker/ \
+#  pwd \
+#  mkdir -p unifi-video/videos \
+#  ls -al \
+#  cd unifi-video \
+#  chown -R 99:100 /volume1/docker/unifi-video/ \
+#  ls -al
   
 # Add mongodb repo, key, update and install needed packages
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 && \
