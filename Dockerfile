@@ -2,7 +2,7 @@
 #MAINTAINER pducharme@me.com
 
 # Version
-ENV version 3.10.2
+ENV version 3.10.1
 
 # Set correct environment variables
 ENV HOME /root
@@ -24,26 +24,6 @@ RUN cd /volume1/docker/ \
   chown -R 99:100 /volume1/docker/unifi-video/ \
   ls -al
   
-# Docker settings setup
-docker run \
-        --name unifi-video \
-        --security-opt apparmor:unconfined \
-        --network="host" \
-        --restart=unless-stopped \
-        --cap-add SYS_ADMIN \
-        --cap-add DAC_READ_SEARCH \
-        -p 1935:1935 \
-        -p 7080:7080 \
-        -p 7442:7442 \
-        -p 7443:7443 \
-        -p 7446:7446 \
-        -v /volume1/docker/unifi-video:/var/lib/unifi-video \
-        -v /volume1/docker/unifi-video/videos:/var/lib/unifi-video/videos \
-        -e TZ=Europe/Moscow \
-        -e PUID=99 \
-        -e PGID=100 \
-        -e DEBUG=1
-
 # Add mongodb repo, key, update and install needed packages
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 && \
   echo "deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-4.0.list && \
