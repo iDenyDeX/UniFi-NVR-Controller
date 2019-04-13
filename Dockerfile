@@ -1,32 +1,23 @@
-#FROM phusion/baseimage:0.11
-#MAINTAINER pducharme@me.com
+FROM phusion/baseimage:0.11
+MAINTAINER pducharme@me.com
 
 # Version
-ENV version 3.10.1
+ENV version 3.10.2
 
 # Set correct environment variables
 ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL C.UTF-8
-ENV LANG ru_RU.UTF-8
-ENV LANGUAGE ru_RU.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
 
 # Add needed patches and scripts
 ADD unifi-video.patch /unifi-video.patch
 ADD run.sh /run.sh
 
-# Create folder for Sanology NAS
-#RUN cd /volume1/docker/ \
-#  pwd \
-#  mkdir -p unifi-video/videos \
-#  ls -al \
-#  cd unifi-video \
-#  chown -R 99:100 /volume1/docker/unifi-video/ \
-#  ls -al
-  
 # Add mongodb repo, key, update and install needed packages
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 && \
-  echo "deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-4.0.list && \
+  echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-4.0.list && \
   apt-get update && \
   apt-get install -y apt-utils && \
   apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
@@ -44,7 +35,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75
     wget
 
 # Get, install and patch unifi-video
-RUN wget -q -O unifi-video.deb https://dl.ubnt.com/firmwares/ufv/v3.10.1/unifi-video.Ubuntu18.04_amd64.v3.10.1.deb && \
+RUN wget -q -O unifi-video.deb https://dl.ubnt.com/firmwares/unifi-video/v${version}/unifi-video.Ubuntu18.04_amd64.v${version}.deb && \
   dpkg -i unifi-video.deb && \
   patch -N /usr/sbin/unifi-video /unifi-video.patch && \
   rm /unifi-video.deb && \
