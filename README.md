@@ -11,6 +11,25 @@ Restart the docker, visit http://localhost:7080 or http://<ip.address>:7080/ to 
 
 # Run it
 ```
+docker run -d \
+        --name UniFi-NVR-Controller \
+	--security-opt apparmor:unconfined \
+	--network="host" \
+	--restart=unless-stopped \
+	--cap-add SYS_ADMIN \
+        --cap-add DAC_READ_SEARCH \
+	-v /volume1/docker/unifi-video/data:/var/lib/unifi-video \
+        -v /volume1/docker/unifi-video/videos:/var/lib/unifi-video/videos \
+	-v /volume1/docker/unifi-video/logs:/var/log/unifi-video \
+        -e TZ=Europe/Moscow \
+	-e PUID=99 \
+        -e PGID=100 \
+        -e DEBUG=1 \
+	ideny/unifi-nvr-controller
+```
+OR
+
+```
 docker run \
         --name unifi-video \
         --cap-add SYS_ADMIN \
