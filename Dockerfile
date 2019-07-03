@@ -1,8 +1,8 @@
 FROM phusion/baseimage:0.11
-MAINTAINER pducharme@me.com
+MAINTAINER deny7@mail.ru
 
 # Version
-ENV version 3.10.5
+ENV version 3.10.6
 
 # Set correct environment variables
 ENV HOME /root
